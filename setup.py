@@ -8,7 +8,7 @@ __version__ = "0.0.0"
 
 REPO_NAME = "Chest-X-ray-Cancer-Classification"
 AUTHOR_USER_NAME = "JamieVo890"
-SRC_REPO = "Chest_Xray_Cancer_Classifer"
+SRC_REPO = "chest_cancer_classifier"
 AUTHOR_EMAIL = "jamievo123@gmail.com"
 
 
@@ -17,7 +17,7 @@ setuptools.setup(
     version=__version__,
     author=AUTHOR_USER_NAME,
     author_email=AUTHOR_EMAIL,
-    description="Chsest Xray Cancer Classifier",
+    description="Chest Xray Cancer Classifier",
     long_description=long_description,
     long_description_content="text/markdown",
     url=f"https://github.com/{AUTHOR_USER_NAME}/{REPO_NAME}",

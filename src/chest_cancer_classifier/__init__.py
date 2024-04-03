@@ -1,3 +1,4 @@
+
 import os
 import sys
 import logging
@@ -19,4 +20,4 @@ logging.basicConfig(
     ]
 )
 
-logger = logging.getLogger("Chest_Xray_Logger")
+logger = logging.getLogger("cnnClassifierLogger")
