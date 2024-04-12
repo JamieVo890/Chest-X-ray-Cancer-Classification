@@ -22,7 +22,7 @@ class PrepareBaseModel:
 
     
     @staticmethod
-    def _prepare_full_model(model, classes, freeze_all, freeze_till, learning_rate):
+    def _prepare_full_model(model, classes, freeze_all, freeze_till):
         if freeze_all:
             for layer in model.layers:
                 model.trainable = False
@@ -41,12 +41,6 @@ class PrepareBaseModel:
             outputs=prediction
         )
 
-        full_model.compile(
-            optimizer=tf.keras.optimizers.SGD(learning_rate=learning_rate),
-            loss=tf.keras.losses.CategoricalCrossentropy(),
-            metrics=["accuracy"]
-        )
-
         full_model.summary()
         return full_model
     
@@ -57,7 +51,6 @@ class PrepareBaseModel:
             classes=self.config.params_classes,
             freeze_all=True,
             freeze_till=None,
-            learning_rate=self.config.params_learning_rate
         )
 
         self.save_model(path=self.config.updated_base_model_path, model=self.full_model)
