@@ -1,10 +1,11 @@
+import os
+import mlflow
 from chest_cancer_classifier.constants import *
 from chest_cancer_classifier.utils.common import read_yaml, create_directories
-import os
 from chest_cancer_classifier.entity.config_entity import (DataIngestionConfig)
 from chest_cancer_classifier.entity.config_entity import (PrepareBaseModelConfig)
 from chest_cancer_classifier.entity.config_entity import (TrainingConfig)
-
+from chest_cancer_classifier.entity.config_entity import (EvaluationConfig)
 
 class ConfigurationManager:
     def __init__(
@@ -74,3 +75,19 @@ class ConfigurationManager:
         )
 
         return training_config
+
+    def get_evaluation_config(self) -> EvaluationConfig:
+        if "MLFLOW_TRACKING" in os.environ:
+            tracking_uri = os.environ["MLFLOW_TRACKING"]
+        else:
+            tracking_uri = mlflow.get_tracking_uri()
+
+        eval_config = EvaluationConfig(
+            path_of_model="artifacts/training/model.h5",
+            training_data="artifacts/data_ingestion/Chest-CT-Scan-data",
+            mlflow_uri=tracking_uri,
+            all_params=self.params,
+            params_image_size=self.params.IMAGE_SIZE,
+            params_batch_size=self.params.BATCH_SIZE
+        )
+        return eval_config
